@@ -4,6 +4,7 @@ import window from '@ohos.window';
 import process from '@ohos.process';
 import { LogUtils } from '@ohos/common/src/main/ets/utils/LogUtils';
 import { AbilityConstant, Want } from '@kit.AbilityKit';
+import { LoadingUtils } from '@ohos/common/src/main/ets/utils/LoadingUtils';
 
 const TAG: string = 'EntryAbility';
 const DOMAIN_NUMBER: number = 0xFF00;
@@ -37,6 +38,7 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage) {
     let windowClass = null;
+    LoadingUtils.createLoadingWindow(windowStage)
     windowStage.getMainWindow((err, data) => {
 
       if (err.code) {
@@ -89,6 +91,7 @@ export default class EntryAbility extends UIAbility {
   onWindowStageDestroy() {
     // Main window is destroyed, release UI related resources
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
+    LoadingUtils.destroyLoadingWindow()
   }
 
   onForeground() {
