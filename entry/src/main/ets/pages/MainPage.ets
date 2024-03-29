@@ -1,5 +1,4 @@
-import { EventKeys, LoadingDialog, loadingEvent, LogUtils } from '@ohos/common'
-import { emitter } from '@kit.BasicServicesKit'
+import { LogUtils } from '@ohos/common'
 import MainViewModel from '../viewmodel/MainViewModel'
 import { HomePage } from './HomePage'
 import { LearnPage } from './LearnPage'
@@ -11,35 +10,6 @@ import { TabItem } from '../entity/TabItem'
 struct MainPage {
   @State selectedIndex: number = 0
   @Provide homeTabSelected: number = 0
-  @State loadingTips: string = "加载中..."
-  @State loadingShow: boolean = false
-  //全局的loading
-  loadingDialogController: CustomDialogController = new CustomDialogController({
-    builder: LoadingDialog({ loadingTips: this.loadingTips }),
-    alignment: DialogAlignment.Center,
-    autoCancel: false,
-    gridCount: 2,
-    cancel: () => {
-      this.loadingShow = false
-    }
-  })
-
-  aboutToAppear() {
-    emitter.on(loadingEvent, (event) => {
-      if (event.data?.showLoading == true && !this.loadingShow) {
-        this.loadingShow = true
-        this.loadingTips = event.data.loadingTips
-        this.loadingDialogController.open()
-      } else if (event.data?.showLoading == false) {
-        this.loadingDialogController.close()
-        this.loadingShow = false
-      }
-    })
-  }
-
-  aboutToDisappear() {
-    emitter.off(EventKeys.LOADING_DIALOG_EVENT)
-  }
 
   build() {
     Column() {
