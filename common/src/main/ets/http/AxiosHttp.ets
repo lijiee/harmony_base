@@ -1,0 +1,146 @@
+import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios';
+import { CommonType } from '../common/TypeAlias';
+import { LogUtils } from '../utils/LogUtils';
+import { errorHandler } from './AxiosRequest';
+import { bundleManager } from '@kit.AbilityKit';
+import { MD5 } from '../utils/EncryptUtils';
+
+
+/**
+ * 定义接口响应包装类
+ */
+export interface BaseResponse {
+  //wanAndroid-API响应体
+  success: Boolean | null
+  message: string | null
+  msg: string | null
+  code: number | null
+  //拓展xxx-API响应体
+}
+
+/**
+ * 接口实现类包装，例如有其他业务可以再次继承实现xxxResponse
+ */
+export interface ApiResponse<T = CommonType> extends BaseResponse {
+  //wanAndroid-API响应体
+  entity: T;
+  data: T;
+  //拓展xxx-API响应体
+}
+
+/**
+ * 封装后，不支持传入拦截器
+ * 需要自己定义接口继承 AxiosRequestConfig类型
+ * 从而支持传入拦截器，但拦截器选项应为可选属性
+ * 之后请求实例传入的options为继承了AxiosRequestConfig的自定义类型
+ */
+interface InterceptorHooks {
+  requestInterceptor?: (config: HttpRequestConfig) => Promise<HttpRequestConfig>;
+  requestInterceptorCatch?: (error: CommonType) => CommonType;
+  responseInterceptor?: (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>;
+  responseInterceptorCatch?: (error: CommonType) => CommonType;
+}
+
+//这里主要是高版本的axios中设置拦截器的时候里面的Config属性必须是InternalAxiosRequestConfig，但是InternalAxiosRequestConfig里面的headers是必传，所以在实现的子类我设置成非必传会报错，加了个忽略注解
+export interface  HttpRequestConfig extends  InternalAxiosRequestConfig {
+  showLoading?: boolean; //是否展示请求loading
+  checkResultCode?: boolean; //是否检验响应结果码
+  checkLoginState?: boolean //校验用户登陆状态
+  needJumpToLogin?: boolean //是否需要跳转到登陆页面
+  interceptorHooks?: InterceptorHooks
+}
+
+
+/**
+ * 网络请求构造
+ * 基于axios框架实现
+ */
+
+export class AxiosHttpRequest {
+  config: HttpRequestConfig;
+  interceptorHooks?: InterceptorHooks;
+  instance: AxiosInstance;
+
+  constructor(options: HttpRequestConfig) {
+    this.config = options;
+    this.interceptorHooks = options.interceptorHooks;
+    this.instance = axios.create(options);
+    this.setupInterceptor()
+  }
+  async addParams(map?: Record<string, CommonType>) {
+    map = map ?? {}
+    const specificDateTime = new Date();
+    const timestamps = specificDateTime.getTime();
+    let privateKey = "vuPgVevkiM7AnzuyjrKYihIGLmFLfk8Fxc8IX3QJtZJc6UUddutOHCOIebZxCK8L"
+    let formInfo = await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
+    map["privateKey"] = privateKey
+    map["timestamps"] = timestamps
+    map["version"] = formInfo.versionName
+    let signForString = "";
+    Object.keys(map)
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((key) => {
+        signForString += `${key}|${map![key]}|`;
+      });
+    if (signForString.length > 0) {
+      signForString = signForString.substring(0, signForString.length - 1);
+    }
+    let sign = await MD5.digest(signForString)
+    map["sign"] = sign;
+    return map
+  }
+
+  setupInterceptor(): void {
+    this.instance.interceptors.request.use(//这里主要是高版本的axios中设置拦截器的时候里面的Config属性必须是InternalAxiosRequestConfig，但是InternalAxiosRequestConfig里面的headers是必传，所以在实现的子类我设置成非必传会报错，加了个忽略注解
+      this.interceptorHooks?.requestInterceptor,
+      this.interceptorHooks?.requestInterceptorCatch,
+    );
+    this.instance.interceptors.response.use(
+      this.interceptorHooks?.responseInterceptor,
+      this.interceptorHooks?.responseInterceptorCatch,
+    );
+  }
+
+  // 类型参数的作用，T决定AxiosResponse实例中data的类型
+  async request<T = CommonType>(config: HttpRequestConfig): Promise<T> {
+    config.params = await this.addParams(config.params)
+    return new Promise<T>((resolve, reject) => {
+      this.instance
+        .request<CommonType, T>(config)
+        .then(res => {
+          resolve(res);
+        })
+        .catch((err: CommonType) => {
+          LogUtils.error("网络请求Request异常：", err?.toString())
+          errorHandler(err)
+          if (err) {
+            reject(err);
+          }
+        });
+    });
+  }
+
+  get<T = CommonType>(config: HttpRequestConfig): Promise<T> {
+    config.method = 'GET'
+    return this.request(config);
+  }
+
+  post<T = CommonType>(config: HttpRequestConfig): Promise<T> {
+    config.method = 'POST'
+    return this.request(config);
+  }
+
+  delete<T = CommonType>(config: HttpRequestConfig): Promise<T> {
+    config.method = 'DELETE'
+    return this.request(config);
+  }
+
+  patch<T = CommonType>(config: HttpRequestConfig): Promise<T> {
+    config.method = 'PATCH'
+    return this.request(config);
+  }
+}
+
+
+
+

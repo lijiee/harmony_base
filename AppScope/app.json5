@@ -1,0 +1,11 @@
+{
+  "app": {
+    "bundleName": "com.rhkj.student",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.9.51",
+    "icon": "$media:app_icon",
+    "debug": true,
+    "label": "$string:app_name"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "float": [
+    {
+      "name": "size_text_14",
+      "value": "14fp"
+    },
+    {
+      "name": "size_text_15",
+      "value": "15fp"
+    },
+    {
+      "name": "size_text_16",
+      "value": "16fp"
+    },
+    {
+      "name": "size_text_18",
+      "value": "18fp"
+    },
+    {
+      "name": "size_text_50",
+      "value": "50fp"
+    },
+    {
+      "name": "size_text_20",
+      "value": "20fp"
+    },
+    {
+      "name": "size_5",
+      "value": "5vp"
+    },
+    {
+      "name": "size_6",
+      "value": "6vp"
+    },
+    {
+      "name": "size_10",
+      "value": "10vp"
+    },
+    {
+      "name": "size_50",
+      "value": "50vp"
+    },
+    {
+      "name": "size_150",
+      "value": "150vp"
+    }
+  ]
+}

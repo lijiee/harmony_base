@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "reason",
+      "value": "签到打卡需求获取定位信息"
+    },
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "仁和会计"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "widget_display_name",
+      "value": "widget"
+    }
+  ]
+}

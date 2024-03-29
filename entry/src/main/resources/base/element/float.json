@@ -1,0 +1,36 @@
+{
+  "float": [
+    {
+      "name": "tab_bar_height",
+      "value": "56vp"
+    },
+    {
+      "name": "tab_image_size",
+      "value": "21vp"
+    },
+    {
+      "name": "tab_margin_top",
+      "value": "8vp"
+    },
+    {
+      "name": "tab_margin_bottom",
+      "value": "5vp"
+    },
+    {
+      "name": "tab_text_margin_bottom",
+      "value": "7vp"
+    },
+    {
+      "name": "tab_text_height",
+      "value": "14vp"
+    },
+    {
+      "name": "tab_text_font_size",
+      "value": "10fp"
+    },
+    {
+      "name": "font_size",
+      "value": "14fp"
+    }
+  ]
+}
