@@ -1,4 +1,6 @@
 // import {
+import { VideoComponent } from '@ohos/common'
+
 //   StateComponent,
 //   EmptyState,
 //   LogUtils,
@@ -109,20 +111,30 @@
 @Entry
 @Component
 export struct HomePage {
-  private settings: RenderingContextSettings = new RenderingContextSettings(true)
-  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings)
+  @State isFullScreen: boolean = false
+  @State iUrl: string = 'xxxx.mp4'
+  private intervalID?: number
 
   build() {
-    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-      Canvas(this.context)
-        .width('100%')
-        .height('100%')
-        .backgroundColor('#ffff00')
-        .onReady(() => {
-          this.context.fillRect(0, 30, 100, 100)
+    Column() {
+      VideoComponent({ isFullScreen: this.isFullScreen, iUrl: this.iUrl })
+      Button("切换按钮")
+        .onClick(() => {
+          this.iUrl = "xxxxx.mp4"
         })
+        .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
     }
     .width('100%')
     .height('100%')
+  }
+
+  onPageShow(): void {
+    this.intervalID = setInterval(() => {
+
+    }, 3000)
+  }
+
+  onPageHide(): void {
+    clearInterval(this.intervalID)
   }
 }

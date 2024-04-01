@@ -5,6 +5,7 @@ import process from '@ohos.process';
 import { LogUtils } from '@ohos/common/src/main/ets/utils/LogUtils';
 import { AbilityConstant, Want } from '@kit.AbilityKit';
 import { LoadingUtils } from '@ohos/common/src/main/ets/utils/LoadingUtils';
+import { WindowUtils } from '@ohos/common';
 
 const TAG: string = 'EntryAbility';
 const DOMAIN_NUMBER: number = 0xFF00;
@@ -12,7 +13,7 @@ const DOMAIN_NUMBER: number = 0xFF00;
 export default class EntryAbility extends UIAbility {
   private selectPage: string = '';
   private currentWindowStage: window.WindowStage | null = null;
-  onCreate(want, launchParam) {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
     // 获取router事件中传递的targetPage参数
     hilog.info(DOMAIN_NUMBER, TAG, `Ability onCreate, ${JSON.stringify(want)}`);
@@ -37,8 +38,13 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
-    let windowClass = null;
+    let windowClass: window.Window | undefined = undefined;
     LoadingUtils.createLoadingWindow(windowStage)
+    let windowUtil = WindowUtils.getInstance();
+    if (windowUtil !== undefined) {
+      windowUtil.setWindowStage(windowStage);
+      windowUtil.setMainWindowPortrait();
+    }
     windowStage.getMainWindow((err, data) => {
 
       if (err.code) {

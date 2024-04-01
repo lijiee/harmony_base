@@ -19,6 +19,14 @@
     {
       "name": "load_nonet",
       "value": "网络错误 "
+    },
+    {
+      "name": "play_again",
+      "value": "重播"
+    },
+    {
+      "name": "play_speed",
+      "value": "倍速"
     }
 
 
