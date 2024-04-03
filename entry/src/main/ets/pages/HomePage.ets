@@ -1,5 +1,8 @@
 // import {
-import { VideoComponent } from '@ohos/common'
+import { JsonUtils, LogUtils, ScanServiceManager, VideoComponent } from '@ohos/common'
+import { scanBarcode, scanCore } from '@kit.ScanKit'
+import { BusinessError } from '@kit.BasicServicesKit'
+import { hilog } from '@kit.PerformanceAnalysisKit'
 
 //   StateComponent,
 //   EmptyState,
@@ -117,12 +120,30 @@ export struct HomePage {
 
   build() {
     Column() {
-      VideoComponent({ isFullScreen: this.isFullScreen, iUrl: this.iUrl })
-      Button("切换按钮")
+      // VideoComponent({ isFullScreen: this.isFullScreen, iUrl: this.iUrl })
+      // Button("切换按钮")
+      //   .onClick(() => {
+      //     this.iUrl = "xxxxx.mp4"
+      //   })
+        // .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
+      Button("classid按钮")
         .onClick(() => {
-          this.iUrl = "xxxxx.mp4"
+        let params =  ScanServiceManager.getInstance().getServiceByContent("http://www.baidu.com?classId=2");
+          LogUtils.debug(JsonUtils.stringify(params ?? ''))
         })
-        .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
+      Button("PreachId按钮")
+        .onClick(() => {
+          // this.iUrl = "xxxxx.mp4"
+          let params =   ScanServiceManager.getInstance().getServiceByContent("http://www.baidu.com")
+          LogUtils.debug(JsonUtils.stringify(params ?? ''))
+        })
+      Button("mId按钮")
+        .onClick(() => {
+          // this.iUrl = "xxxxx.mp4"
+          let params =   ScanServiceManager.getInstance().getServiceByContent("http://www.baidu.com?preachId=2")
+          LogUtils.debug(JsonUtils.stringify(params ?? ''))
+        })
+
     }
     .width('100%')
     .height('100%')

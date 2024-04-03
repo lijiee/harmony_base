@@ -5,7 +5,7 @@ import process from '@ohos.process';
 import { LogUtils } from '@ohos/common/src/main/ets/utils/LogUtils';
 import { AbilityConstant, Want } from '@kit.AbilityKit';
 import { LoadingUtils } from '@ohos/common/src/main/ets/utils/LoadingUtils';
-import { WindowUtils } from '@ohos/common';
+import { ClassScanService, PreachScanService, ScanServiceManager, WindowUtils } from '@ohos/common';
 
 const TAG: string = 'EntryAbility';
 const DOMAIN_NUMBER: number = 0xFF00;
@@ -13,6 +13,7 @@ const DOMAIN_NUMBER: number = 0xFF00;
 export default class EntryAbility extends UIAbility {
   private selectPage: string = '';
   private currentWindowStage: window.WindowStage | null = null;
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
     // 获取router事件中传递的targetPage参数
@@ -22,6 +23,7 @@ export default class EntryAbility extends UIAbility {
       this.selectPage = params.targetPage;
     }
   }
+
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(DOMAIN_NUMBER, TAG, `onNewWant Want: ${JSON.stringify(want)}`);
     if (want.parameters?.params !== undefined) {
@@ -38,6 +40,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
+    ScanServiceManager.getInstance().addService([new PreachScanService(), new ClassScanService()])
     let windowClass: window.Window | undefined = undefined;
     LoadingUtils.createLoadingWindow(windowStage)
     let windowUtil = WindowUtils.getInstance();
@@ -110,3 +113,4 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
   }
 }
+
