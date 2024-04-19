@@ -31,6 +31,8 @@ export struct LearnPage {
           .onClick(() => this.packToFile())
       }
     }
+    .width('100%')
+    .height('100%')
   }
 
   onTouchEvent(event: TouchEvent): void {
