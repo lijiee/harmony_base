@@ -120,12 +120,12 @@ export struct HomePage {
 
   build() {
     Column() {
-      // VideoComponent({ isFullScreen: this.isFullScreen, iUrl: this.iUrl })
-      // Button("切换按钮")
-      //   .onClick(() => {
-      //     this.iUrl = "xxxxx.mp4"
-      //   })
-        // .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
+      VideoComponent({ isFullScreen: this.isFullScreen, iUrl: this.iUrl })
+      Button("切换按钮")
+        .onClick(() => {
+          this.iUrl = "xxxxx.mp4"
+        })
+        .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
       Button("classid按钮")
         .onClick(() => {
         let params =  ScanServiceManager.getInstance().getServiceByContent("http://www.baidu.com?classId=2");
