@@ -67,26 +67,8 @@ export class AxiosHttpRequest {
     this.instance = axios.create(options);
     this.setupInterceptor()
   }
+  /// 添加通用参数
   async addParams(map?: Record<string, CommonType>) {
-    map = map ?? {}
-    const specificDateTime = new Date();
-    const timestamps = specificDateTime.getTime();
-    let privateKey = "vuPgVevkiM7AnzuyjrKYihIGLmFLfk8Fxc8IX3QJtZJc6UUddutOHCOIebZxCK8L"
-    let formInfo = await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
-    map["privateKey"] = privateKey
-    map["timestamps"] = timestamps
-    map["version"] = formInfo.versionName
-    let signForString = "";
-    Object.keys(map)
-      .sort((a, b) => a.localeCompare(b))
-      .forEach((key) => {
-        signForString += `${key}|${map![key]}|`;
-      });
-    if (signForString.length > 0) {
-      signForString = signForString.substring(0, signForString.length - 1);
-    }
-    let sign = await MD5.digest(signForString)
-    map["sign"] = sign;
     return map
   }
 

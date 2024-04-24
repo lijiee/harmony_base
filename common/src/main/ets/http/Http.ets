@@ -1,45 +1,23 @@
 // 引入包名
 import http from '@ohos.net.http';
 import { BusinessError } from '@ohos.base';
-import { MD5 } from '@ohos/common';
-import { systemDateTime } from '@kit.BasicServicesKit';
 let httpRequest = http.createHttp();
 httpRequest.on('headersReceive', (header: Object) => {
   console.info('header: ' + JSON.stringify(header));
 });
 
+/// 添加公共参数
 async function setBaseExtraData(options: Record<string,string|number>){
-  let baseExtra: Record<string,string|number> = options || {}
-  let time: number = await systemDateTime.getCurrentTime(false)
-  baseExtra['timestamps'] = time.toString()
-  baseExtra['privateKey'] = "vuPgVevkiM7AnzuyjrKYihIGLmFLfk8Fxc8IX3QJtZJc6UUddutOHCOIebZxCK8L"
-  let signForString = "";
-  Object.keys(baseExtra)
-    .sort((a, b) => a.localeCompare(b))
-    .forEach((key) => {
-      signForString += `${key}|${baseExtra![key]}|`;
-    });
-  if (signForString.length > 0) {
-    signForString = signForString.substring(0, signForString.length - 1);
-  }
-  let hash = await MD5.digest(signForString)
-  baseExtra['sign'] = hash
-  let encodedData = Object.keys(baseExtra)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(baseExtra[key])}`)
-    .join('&');
-  return encodedData
+  return options
 }
 export async function loginFunction(options: Record<string,string|number>) {
   let paramsStr = await setBaseExtraData(options);
   httpRequest.request(// 填写HTTP请求的URL地址，可以带参数也可以不带参数。URL地址需要开发者自定义。请求的参数可以在extraData中指定
-    "https://apipre.rhkj.com/api/user/login",
+    "xxxxxx",
     {
       method: http.RequestMethod.POST, // 可选，默认为http.RequestMethod.GET
       extraData: paramsStr,
       expectDataType: http.HttpDataType.STRING, // 可选，指定返回数据的类型
-      header: {
-        'content-Type': 'application/x-www-form-urlencoded'
-      },
       readTimeout: 60000, // 可选，默认为60000ms
       connectTimeout: 60000, // 可选，默认为60000ms
     },

@@ -43,20 +43,7 @@ import { AxiosHttpRequest } from './AxiosHttp';
       }
       LogUtils.debug('网络请求响应Response:', `\n${JsonUtils.stringify(response.data)}`);
       if (response.status === 200) {
-        if (response.data.success != null) {
-          if (response.data.success == false ) {
-            showToast(response.data.message)
-            return Promise.reject(response)
-          }
-          return Promise.resolve(response.data.entity);
-        } else {
-          if (response.data.code != 200 ) {
-            showToast(response.data.msg)
-            return Promise.reject(response)
-          }
-          return Promise.resolve(response.data.data);
-
-        }
+        return Promise.resolve(response.data);
       } else {
         return Promise.reject(response);
       }
