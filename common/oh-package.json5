@@ -1,9 +1,9 @@
 {
-  "name": "common",
+  "name": "common_lj",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",
-  "author": "",
+  "author": "lijiee",
   "license": "Apache-2.0",
   "dependencies": {}
 }
