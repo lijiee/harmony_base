@@ -28,6 +28,10 @@
     {
       "name": "common_base",
       "srcPath": "./common_base"
+    },
+    {
+      "name": "common_calendar",
+      "srcPath": "./common_calendar"
     }
   ]
 }

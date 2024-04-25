@@ -1,0 +1,34 @@
+{
+  "string": [
+    {
+      "name": "page_name",
+      "value": "name"
+    },
+    {
+      "name": "loading",
+      "value": "正在加载..."
+    },
+    {
+      "name": "load_error",
+      "value": "加载失败"
+    },
+    {
+      "name": "load_nodata",
+      "value": "暂无数据~"
+    },
+    {
+      "name": "load_nonet",
+      "value": "网络错误 "
+    },
+    {
+      "name": "play_again",
+      "value": "重播"
+    },
+    {
+      "name": "play_speed",
+      "value": "倍速"
+    }
+
+
+  ]
+}

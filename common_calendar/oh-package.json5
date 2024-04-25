@@ -1,0 +1,10 @@
+{
+  "name": "@hereby/common_calendar",
+  "version": "1.0.0",
+  "description": "日历封装可以左右切换/上下切换",
+  "main": "Index.ets",
+  "author": "lijiee",
+  "license": "MIT",
+  "repository": "https://github.com/lijiee/harmony_base.git",
+  "dependencies": {}
+}

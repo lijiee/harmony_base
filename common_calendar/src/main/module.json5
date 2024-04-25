@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "common_calendar",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}
