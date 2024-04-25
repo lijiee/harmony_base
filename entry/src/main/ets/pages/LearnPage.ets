@@ -4,7 +4,7 @@ import { common2D, drawing } from '@kit.ArkGraphics2D';
 import { image } from '@kit.ImageKit';
 import fs from '@ohos.file.fs';
 import { componentSnapshot } from '@kit.ArkUI';
-import { showToast } from '@ohos/common';
+import { showToast } from '@ohos/common_base';
 
 @Entry
 @Component

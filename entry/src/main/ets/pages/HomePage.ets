@@ -1,5 +1,5 @@
 // import {
-import { JsonUtils, LogUtils, ScanServiceManager, VideoComponent } from '@ohos/common'
+import { JsonUtils, LogUtils, ScanServiceManager, VideoComponent } from '@ohos/common_base'
 import { scanBarcode, scanCore } from '@kit.ScanKit'
 import { BusinessError } from '@kit.BasicServicesKit'
 import { hilog } from '@kit.PerformanceAnalysisKit'

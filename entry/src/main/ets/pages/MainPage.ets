@@ -1,4 +1,4 @@
-import { LogUtils } from '@ohos/common'
+import { LogUtils } from '@ohos/common_base'
 import MainViewModel from '../viewmodel/MainViewModel'
 import { HomePage } from './HomePage'
 import { LearnPage } from './LearnPage'

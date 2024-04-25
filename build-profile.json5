@@ -26,8 +26,8 @@
       ]
     },
     {
-      "name": "common",
-      "srcPath": "./common"
+      "name": "common_base",
+      "srcPath": "./common_base"
     }
   ]
 }

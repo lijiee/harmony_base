@@ -1,11 +1,8 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
-import process from '@ohos.process';
-import { LogUtils } from '@ohos/common/src/main/ets/utils/LogUtils';
 import { AbilityConstant, Want } from '@kit.AbilityKit';
-import { LoadingUtils } from '@ohos/common/src/main/ets/utils/LoadingUtils';
-import { ClassScanService, PreachScanService, ScanServiceManager, WindowUtils } from '@ohos/common';
+import { LoadingUtils,  ClassScanService, PreachScanService, ScanServiceManager, WindowUtils } from '@ohos/common_base';
 
 const TAG: string = 'EntryAbility';
 const DOMAIN_NUMBER: number = 0xFF00;

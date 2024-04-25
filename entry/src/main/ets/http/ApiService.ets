@@ -1,5 +1,5 @@
 import { AxiosHeaders } from '@ohos/axios'
-import { axiosClient, CommonType } from '@ohos/common';
+import { axiosClient, CommonType } from '@ohos/common_base';
 import { AppVersionInfoEntity } from '../entity/AppVersionInfoEntity';
 let baseUrl = "https://xxxx"
 let centerUrl = "https://xxxxx"
