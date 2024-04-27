@@ -2,7 +2,8 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
 import { AbilityConstant, Want } from '@kit.AbilityKit';
-import { LoadingUtils,  ClassScanService, PreachScanService, ScanServiceManager, WindowUtils } from '@ohos/common_base';
+import { ClassScanService, PreachScanService, ScanServiceManager, WindowUtils } from '@ohos/common_base';
+import { LoadingManager } from '@ohos/common_loading';
 
 const TAG: string = 'EntryAbility';
 const DOMAIN_NUMBER: number = 0xFF00;
@@ -39,7 +40,7 @@ export default class EntryAbility extends UIAbility {
   onWindowStageCreate(windowStage: window.WindowStage) {
     ScanServiceManager.getInstance().addService([new PreachScanService(), new ClassScanService()])
     let windowClass: window.Window | undefined = undefined;
-    LoadingUtils.createLoadingWindow(windowStage)
+    LoadingManager.createLoadingWindow("pages/LoadingPage", windowStage)
     let windowUtil = WindowUtils.getInstance();
     if (windowUtil !== undefined) {
       windowUtil.setWindowStage(windowStage);
@@ -97,7 +98,7 @@ export default class EntryAbility extends UIAbility {
   onWindowStageDestroy() {
     // Main window is destroyed, release UI related resources
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
-    LoadingUtils.destroyLoadingWindow()
+    LoadingManager.destroyLoadingWindow()
   }
 
   onForeground() {

@@ -1,15 +1,14 @@
 import window from '@ohos.window';
 import display from '@ohos.display';
-import common from '@ohos.app.ability.common';
-import UIAbility from '@ohos.app.ability.UIAbility';
-export class LoadingUtils {
+export class LoadingManager {
+  private static loading_window: string = "loading_window"
   /**
    * 通过创建子窗口来显示Loading弹窗
    */
-  static createLoadingWindow(stage: window.WindowStage) {
-    stage?.createSubWindow('loading_window').then(async win => {
+  static createLoadingWindow(path: string,stage: window.WindowStage) {
+    stage?.createSubWindow(this.loading_window).then(async win => {
       // 设置子窗口显示的页面
-      await win.setUIContent('pages/LoadingPage')
+      await win.setUIContent(path)
       let d = display.getDefaultDisplaySync()
       let windowClass = stage.getMainWindowSync()
       let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
@@ -26,7 +25,7 @@ export class LoadingUtils {
   static async destroyLoadingWindow() {
     let windowClass: window.Window | undefined = undefined;
     try {
-      windowClass = window.findWindow('loading_window');
+      windowClass = window.findWindow(this.loading_window);
       await windowClass.destroyWindow()
     } catch (_) {
 
@@ -41,7 +40,7 @@ export class LoadingUtils {
   static async showLoadingWindow() {
     let windowClass: window.Window | undefined = undefined;
     try {
-      windowClass = window.findWindow('loading_window');
+      windowClass = window.findWindow(this.loading_window);
       await windowClass.showWindow()
     } catch (exception) {
 
@@ -56,7 +55,7 @@ export class LoadingUtils {
   static async closeLoadingWindow() {
     let windowClass: window.Window | undefined = undefined;
     try {
-      windowClass = window.findWindow('loading_window');
+      windowClass = window.findWindow(this.loading_window);
       await windowClass.minimize();
     } catch (_) {
 

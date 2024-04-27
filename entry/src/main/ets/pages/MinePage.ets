@@ -1,4 +1,4 @@
-import { CalendarComponent, OptMode, DateItem } from '@ohos/common_base';
+import { CalendarComponent, OptMode, DateItem } from '@ohos/common_calendar';
 
 @Entry
 @Component

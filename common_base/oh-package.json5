@@ -2,11 +2,11 @@
   "name": "@hereby/common_base",
   "version": "1.0.1",
   "description": "* 1、网络请求的基础封装(基于axios)；\n* 2、封装项目页面多状态（加载中，成功，失败，空数据）；\n* 3、全局loading实现\n* 4、存储工具/权限工具/json 工具等\n* 5、视频播放器封装\n* 6、日历封装可以左右切换/上下切换",
-  "main": "index.ets",
+  "main": "Index.ets",
   "author": "lijiee",
   "license": "MIT",
   "repository": "https://github.com/lijiee/harmony_base.git",
   "dependencies": {
-    "@ohos/axios": "^2.2.0"
-  }
+    "@ohos/axios": "^2.2.0",
+    "@ohos/common_loading": "../common_loading"}
 }

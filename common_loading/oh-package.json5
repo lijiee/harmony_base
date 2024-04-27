@@ -1,0 +1,10 @@
+{
+  "name": "@hereby/common_loading",
+  "version": "1.0.0",
+  "description": "全局loading实现",
+  "main": "Index.ets",
+  "author": "lijiee",
+  "license": "MIT",
+  "repository": "https://github.com/lijiee/harmony_base.git",
+  "dependencies": {}
+}

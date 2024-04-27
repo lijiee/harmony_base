@@ -20,7 +20,6 @@ export { showToast } from './src/main/ets/utils/ToastUtils'
 
 export { LoadingDialog } from './src/main/ets/components/LoadingDialog'
 
-export { LoadingUtils } from './src/main/ets/utils/LoadingUtils'
 
 export { axiosClient } from './src/main/ets/http/AxiosRequest'
 
@@ -33,13 +32,3 @@ export { WindowUtils } from './src/main/ets/utils/WindowUtil'
 export { AvPlayerUtils } from './src/main/ets/utils/AvPlayerUtils'
 
 export { ScanService, ScanServiceManager, PreachScanService, ClassScanService } from './src/main/ets/scan/ScanService'
-
-export { DateUtil } from './src/main/ets/utils/DateUtil'
-
-export { CalenderItemComponent } from './src/main/ets/calendar/CalenderItemComponent'
-
-export { CalendarComponent } from './src/main/ets/calendar/CalendarComponent'
-
-export { OptMode, DateItem } from './src/main/ets/calendar/CalenderEntity'
-
-export { CommonPicker } from './src/main/ets/components/CommonPicker'

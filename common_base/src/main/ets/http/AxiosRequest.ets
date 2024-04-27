@@ -1,6 +1,6 @@
 import { AxiosError, AxiosRequestHeaders, AxiosResponse } from '@ohos/axios';
 import { CommonType } from '../common/TypeAlias';
-import { LoadingUtils } from '../utils/LoadingUtils';
+import { LoadingManager } from '@ohos/common_loading';
 import { JsonUtils } from '../utils/JsonUtils';
 import { LogUtils } from '../utils/LogUtils';
 import { showToast } from '../utils/ToastUtils';
@@ -25,21 +25,21 @@ import { AxiosHttpRequest } from './AxiosHttp';
       LogUtils.debug('网络请求Request Data:', `${JsonUtils.stringify(config.data)}`);
       axiosClient.config.showLoading = config.showLoading
       if (config.showLoading) {
-       await LoadingUtils.showLoadingWindow()
+       await LoadingManager.showLoadingWindow()
       }
       return config;
     },
     requestInterceptorCatch: async (err) => {
       LogUtils.error("网络请求RequestError", err?.toString())
       if (axiosClient.config.showLoading) {
-       await LoadingUtils.closeLoadingWindow()
+       await LoadingManager.closeLoadingWindow()
       }
       return err;
     },
     responseInterceptor: async (response: AxiosResponse) => {
       //优先执行自己的请求响应拦截器，在执行通用请求request的
       if (axiosClient.config.showLoading) {
-        await LoadingUtils.closeLoadingWindow()
+        await LoadingManager.closeLoadingWindow()
       }
       LogUtils.debug('网络请求响应Response:', `\n${JsonUtils.stringify(response.data)}`);
       if (response.status === 200) {
@@ -50,7 +50,7 @@ import { AxiosHttpRequest } from './AxiosHttp';
     },
     responseInterceptorCatch: async (error) => {
       if (axiosClient.config.showLoading) {
-        await LoadingUtils.closeLoadingWindow()
+        await LoadingManager.closeLoadingWindow()
       }
       LogUtils.error("网络请求响应异常", error?.toString())
       errorHandler(error);

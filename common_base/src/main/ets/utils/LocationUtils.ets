@@ -6,8 +6,8 @@ import { showToast } from './ToastUtils';
 
 
 export class LocationUtil {
-  static async getCurrentLocation(context: Context,permissions:Array<Permissions>): Promise<geoLocationManager.Location> {
-    let checkValue = await PermissionUtil.checkPermission(context,permissions)
+  static async getCurrentLocation(permissions:Array<Permissions>): Promise<geoLocationManager.Location> {
+    let checkValue = await PermissionUtil.checkPermission(permissions)
     if (checkValue) {
       try {
         let requestInfo: geoLocationManager.CurrentLocationRequest = {'priority': geoLocationManager.LocationRequestPriority.FIRST_FIX, 'scenario': geoLocationManager.LocationRequestScenario.UNSET,'maxAccuracy': 0};

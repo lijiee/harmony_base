@@ -5,6 +5,7 @@
     "pages/MinePage",
     "pages/LearnPage",
     "pages/LoginPage",
-    "pages/CustomScanPage"
+    "pages/CustomScanPage",
+    "pages/LoadingPage"
   ]
 }

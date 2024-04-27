@@ -3,7 +3,7 @@ import { CommonType } from '../common/TypeAlias';
 import { LogUtils } from './LogUtils';
 
 export class PermissionUtil {
-  static  async checkPermission(context:Context,permissions: Array<Permissions>) {
+  static  async checkPermission(permissions: Array<Permissions>) {
     let statusArray = new Array<abilityAccessCtrl.GrantStatus>();
     for(let i = 0; i<permissions.length; i++) {
       let status = await PermissionUtil.accessToken(permissions[i])
