@@ -4,12 +4,18 @@ import { HomePage } from './HomePage'
 import { LearnPage } from './LearnPage'
 import { MinePage } from './MinePage'
 import { TabItem } from '../entity/TabItem'
+import { LoadingManager } from '@ohos/common_loading/Index'
 
 @Entry
 @Component
 struct MainPage {
   @State selectedIndex: number = 0
   @Provide homeTabSelected: number = 0
+
+  aboutToAppear(): void {
+    LoadingManager.showLoadingWindow()
+  }
+
 
   build() {
     Column() {
